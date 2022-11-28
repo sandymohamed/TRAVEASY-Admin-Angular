@@ -1,0 +1,26 @@
+<div class="container w-50 ">
+  <form [formGroup]="logginForm" name="logginForm" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
+    <div class="mb-1">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" class="form-control" id="username" formControlName="username">
+    </div>
+    <div
+      *ngIf="logginForm.controls['username'].invalid && (logginForm.controls['username'].dirty || logginForm.controls['username'].touched)"
+      class="alert alert-danger">
+      *invalid username
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" formControlName="password">
+    </div>
+    <div
+      *ngIf="logginForm.controls['password'].invalid && (logginForm.controls['password'].dirty || logginForm.controls['password'].touched)"
+      class="alert alert-danger">
+      *invalid password
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!logginForm.valid">Submit</button>
+  </form>
+  <div class="alert alert-success mt-2" *ngIf="isLoggedIn">
+    Logged in as {{ roles }}.
+  </div>
+</div>

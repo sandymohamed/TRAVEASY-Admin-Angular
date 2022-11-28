@@ -1,0 +1,102 @@
+<section class="slideBar " [ngClass]="collapsed ? 'slideBar-collapsed':''">
+  <div class="logo-container">
+    <a (click)="toggleCollapse()">
+      <img class="logo-icon" src="../../../assets/logoIconWhite.png" alt="logo">
+    </a>
+    <div class="logo-text">
+      <span *ngIf="collapsed">TravEasy</span>
+    </div>
+    <button class="btn-close ms-2" *ngIf="collapsed" (click)="closeSlideBar()">
+    </button>
+  </div>
+  <ul class="slideBar-nav mb-5">
+    <ng-container *ngIf="isLoggedIn">
+      <!-- Start -->
+      <ng-container *ngIf="showAdminBoard">
+        <li class="slideBar-nav-item">
+          <a class="slideBar-nab-link" routerLink="dashboard">
+            <i class="slideBar-link-icon fa-solid fa-chart-line"></i>
+            <span class="slideBar-link-text" *ngIf="collapsed">Dashboard</span>
+          </a>
+        </li>
+        <li class="slideBar-nav-item">
+          <a class="slideBar-nab-link" routerLink="users">
+            <i class="slideBar-link-icon fa-solid fa-user-group"></i>
+            <span class="slideBar-link-text" *ngIf="collapsed">Users</span>
+          </a>
+        </li>
+        <li class="slideBar-nav-item">
+          <a class="slideBar-nab-link" routerLink="city">
+            <i class="slideBar-link-icon fa-solid fa-earth-americas"></i>
+            <span class="slideBar-link-text" *ngIf="collapsed">Cities</span>
+          </a>
+        </li>
+        <li class="slideBar-nav-item">
+          <a class="slideBar-nab-link" routerLink="flight">
+            <i class="slideBar-link-icon fa-solid fa-plane"></i>
+            <span class="slideBar-link-text" *ngIf="collapsed">Flights</span>
+          </a>
+        </li>
+        <li class="slideBar-nav-item">
+          <a class="slideBar-nab-link" routerLink="register">
+            <i class="slideBar-link-icon fa-solid fa-arrow-right-to-bracket"></i>
+            <span class="slideBar-link-text" *ngIf="collapsed">Add Moderator</span>
+          </a>
+        </li>
+      </ng-container>
+      <li class="slideBar-nav-item">
+        <a class="slideBar-nab-link" routerLink="hotel">
+          <i class="fa-solid fa-hotel slideBar-link-icon"></i>
+          <span class="slideBar-link-text" *ngIf="collapsed">Hotels</span>
+        </a>
+      </li>
+      <li class="slideBar-nav-item">
+        <a class="slideBar-nab-link" routerLink="bookedHotel">
+          <i class="slideBar-link-icon fa-solid fa-check"></i>
+          <span class="slideBar-link-text" *ngIf="collapsed">Booked Hotels</span>
+        </a>
+      </li>
+
+      <li class="slideBar-nav-item">
+        <a class="slideBar-nab-link" routerLink="holiday">
+          <i class="fa-solid fa-passport slideBar-link-icon"></i>
+          <span class="slideBar-link-text" *ngIf="collapsed">Holiday</span>
+        </a>
+      </li>
+      <li class="slideBar-nav-item">
+        <a class="slideBar-nab-link" routerLink="bookedHoliday">
+          <i class="fa-solid fa-file-invoice slideBar-link-icon"></i>
+          <span class="slideBar-link-text" *ngIf="collapsed">Booked Holidays</span>
+        </a>
+      </li>
+
+
+      <!-- End -->
+      <li class="slideBar-nav-item">
+        <a class="slideBar-nab-link" routerLink="upload">
+          <i class="slideBar-link-icon fa-solid fa-cloud-arrow-up"></i>
+          <span class="slideBar-link-text" *ngIf="collapsed">Upload</span>
+        </a>
+      </li>
+      <li class="slideBar-nav-item" (click)="logout()">
+        <a class="slideBar-nab-link">
+          <i class="slideBar-link-icon fa-solid fa-arrow-right-to-bracket"></i>
+          <span class="slideBar-link-text" *ngIf="collapsed">Logout</span>
+        </a>
+      </li>
+    </ng-container>
+    <ng-container class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+      <li class="slideBar-nav-item">
+        <a class="slideBar-nab-link" routerLink="login">
+          <i class="slideBar-link-icon fa-solid fa-arrows-down-to-line"></i>
+          <span class="slideBar-link-text" *ngIf="collapsed">Login</span>
+        </a>
+      </li>
+    </ng-container>
+
+
+  </ul>
+
+
+
+</section>

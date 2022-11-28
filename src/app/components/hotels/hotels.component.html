@@ -1,0 +1,158 @@
+<section class="tourGuid">
+
+  <div class="service-count col-md-3" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
+    data-aos-duration="300">
+    <div class="icon" data-aos="fade-up" data-aos-duration="350">
+      <i class="fa-solid fa-earth-asia"></i>
+    </div>
+    <article data-aos="fade-up" data-aos-duration="400">
+      <span>{{hotelsList.length}}</span>
+      <p> Hotels </p>
+    </article>
+  </div>
+
+  <button class="btn btn-primary" (click)="open(content)" (click)="showForm()">Add New Hotel</button>
+  <table class="table table-striped table-hover" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
+    data-aos-duration="300">
+    <thead data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="350">
+      <!-- <td>Id</td> -->
+      <td>Hotel Name</td>
+      <td>City</td>
+      <td>Evaluation</td>
+      <!-- <td>Img URL</td> -->
+      <!-- <td>Period (in days)</td> -->
+      <td>Description</td>
+      <td>Price</td>
+      <td>lon(for map)</td>
+      <td>lat(for map)</td>
+
+      <td>Edit</td>
+      <td>Delete</td>
+
+    </thead>
+    <tbody>
+
+      <tr data-aos="fade-up" *ngFor="let i of hotelsList" data-aos-anchor-placement="center-bottom"
+        data-aos-duration="400">
+        <!-- <td>{{i?._id}}</td> -->
+        <td>{{i?.HotelName}}</td>
+        <td>{{i?.City?.City_Name}}</td>
+        <td>{{i?.Evaluation}}</td>
+        <!-- <td>{{i?.ImgURL}}</td> -->
+        <!-- <td>{{i?.Period}}</td> -->
+        <td>{{i?.Description}}</td>
+        <td>{{i?.Price}}</td>
+        <td>{{i?.lon}}</td>
+        <td>{{i?.lat}}</td>
+        <td><button class="orangeBtn" (click)="open(content)" (click)="handleEditBtn(i?._id)">Edit</button></td>
+        <td><button class="redBtn" (click)="handleDelete(i?._id)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+<hr>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Hotel Details</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+
+  <div class="modal-body">
+    <form [hidden]="!editMode && !postMode" [formGroup]="form" (ngSubmit)="handleSubmit(form.value)">
+
+      <div class="mb-3">
+        <label for="HotelName" class="form-label">HotelName</label>
+        <input required type="text" class="form-control" id="HotelName" formControlName="hotelName" ngModel>
+        <div class="alert alert-warning" *ngIf="form.controls['hotelName'].invalid && (form.dirty || form.touched)">
+          <small> name is required & name must be atleast 3 letters</small>
+        </div> 
+      </div>
+      <div class="mb-3 ">
+        <p>City</p>
+
+        <div *ngFor="let i of cities">
+          <input class="me-1"  type="radio" id="{{i?._id}}" formControlName="city" [value]="i?._id"
+            ngModel>
+          <label class="form-label" for="{{i?._id }}">{{i?.City_Name}}</label> <br>
+        </div>
+        <div class="alert alert-warning" *ngIf="form.controls['city'].invalid && (form.dirty || form.touched)">
+          <small> This is required</small>
+        </div>
+      </div>
+
+
+      <div class="mb-3 ">
+        <label class="form-label" for="Evaluation">Evaluation</label>
+        <input required class="form-control" type="number" min="0" max="5" id="Evaluation" formControlName="evaluation"
+          ngModel>
+
+        <div class="alert alert-warning" *ngIf="form.controls['evaluation'].invalid && (form.dirty || form.touched)">
+          <small> This is required , enter number between 0:5 </small>
+        </div>
+
+
+      </div> 
+      <!-- <div class="mb-3">
+        <label for="ImgURL" class="form-label">ImgURL</label>
+        <input required type="text" class="form-control" id="ImgURL" formControlName="img" ngModel> -->
+        <!-- <div class="alert alert-warning" *ngIf="form.controls['img'].invalid && (form.dirty || form.touched)">
+          <small> This is required</small>
+        </div> -->
+      <!-- </div> -->
+       <div class="mb-3 ">
+      
+      <app-image-upload></app-image-upload>
+      </div>
+      
+
+      <!-- <div class="mb-3 ">
+        <label class="form-label" for="Period">Period (in days)</label>
+        <input required class="form-control" type="number" min="1" id="Period" formControlName="period" ngModel>
+
+        <div class="alert alert-warning" *ngIf="form.controls['period'].invalid && (form.dirty || form.touched)">
+          <small> This is required , should be atleast 1 day </small>
+        </div>
+      </div> -->
+
+      <div class="mb-3">
+        <label for="Description" class="form-label">Description</label>
+        <input required type="text" class="form-control" formControlName="description" ngModel id="Description">
+
+        <div class="alert alert-warning" *ngIf="form.controls['description'].invalid && (form.dirty || form.touched)">
+          <small> name is required & name must be atleast 3 letters</small>
+        </div>
+
+      </div>
+      <div class="mb-3">
+        <label for="lat" class="form-label">lat(for map)</label>
+        <input required type="text" class="form-control" id="lat" formControlName="lat" ngModel>
+
+        <div class="alert alert-warning" *ngIf="form.controls['lat'].invalid && (form.dirty || form.touched)">
+          <small> name is required </small>
+        </div>
+
+      </div>
+
+      <div class="mb-3">
+        <label for="lon" class="form-label">lon(for map)</label>
+        <input required type="text" class="form-control" id="lon" formControlName="lon" ngModel>
+        <div class="alert alert-warning" *ngIf="form.controls['lon'].invalid && (form.dirty || form.touched)">
+          <small> name is required </small>
+        </div>
+      </div>
+      <div class="mb-3 ">
+        <label class="form-label" for="Price">Price</label>
+        <input required class="form-control" type="number" min="1" id="Price" formControlName="price" ngModel>
+
+        <div class="alert alert-warning" *ngIf="form.controls['price'].invalid && (form.dirty || form.touched)">
+          <small> name is required </small>
+        </div>
+      </div>
+      <br>
+      <br>
+
+      <button type="submit" class="btn btn-primary" (click)="modal.close('Save click')">Submit</button>
+    </form>
+  </div>
+  </ng-template>

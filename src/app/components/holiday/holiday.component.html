@@ -1,0 +1,124 @@
+<section class="tourGuid">
+
+  <div class="service-count col-md-3" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
+    data-aos-duration="300">
+    <div class="icon" data-aos="fade-up" data-aos-duration="350">
+      <i class="fa-solid fa-earth-asia"></i>
+    </div>
+    <article data-aos="fade-up" data-aos-duration="400">
+      <span>{{holidaysList.length}}</span>
+      <p> Holidays </p>
+    </article>
+  </div>
+  <button class="btn btn-primary" (click)="open(content)" (click)="showForm()">Add New Holiday</button>
+
+  <table class="table table-striped table-hover" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
+    data-aos-duration="300">
+    <thead data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="350">
+      <!-- <td>Id</td> -->
+      <td>City</td>
+      <td>Evaluation</td>
+      <!-- <td>Img URL</td> -->
+      <td>Period (in days)</td>
+      <td>Description</td>
+      <td>Price</td>
+
+      <td>Edit</td>
+      <td>Delete</td>
+
+    </thead>
+    <tbody>
+
+      <tr data-aos="fade-up" *ngFor="let i of holidaysList" data-aos-anchor-placement="center-bottom"
+        data-aos-duration="400">
+        <!-- <td>{{i?._id}}</td> -->
+        <td>{{i?.City?.City_Name}}</td>
+        <td>{{i?.Evaluation}}</td>
+        <!-- <td>{{i?.ImgURL}}</td> -->
+        <td>{{i?.Period}}</td>
+        <td>{{i?.Description}}</td>
+        <td>{{i?.Price}}</td>
+
+        <td><button class="orangeBtn" (click)="open(content)" (click)="handleEditBtn(i?._id)">Edit</button></td>
+        <td><button class="redBtn" (click)="handleDelete(i?._id)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<hr>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Holiday Details</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+
+  <div class="modal-body">
+
+    <form class="form" [hidden]="!editMode && !postMode" [formGroup]='holidayForm'
+      (ngSubmit)="handleSubmit(holidayForm.value)">
+
+      <div class="mb-3 ">
+        <p>City</p>
+
+        <div *ngFor="let i of cities">
+          <input class="me-1" type="radio" id="{{i?._id}}" formControlName="city" [value]="i?._id" ngModel>
+          <label for="{{i?._id }}">{{i?.City_Name}}</label> <br>
+        </div>
+
+        <div class="alert alert-warning"
+          *ngIf="holidayForm.controls['city'].invalid && (holidayForm.dirty || holidayForm.touched)">
+          <small> This is required</small>
+        </div>
+      </div>
+      <div class="mb-3 ">
+        <label class="form-label" for="Evaluation">Evaluation</label> <br>
+        <input class="form-control" min="0" max="5" type="number" id="Evaluation" formControlName="evaluation" ngModel>
+
+        <div class="alert alert-warning"
+          *ngIf="holidayForm.controls['evaluation'].invalid && (holidayForm.dirty || holidayForm.touched)">
+          <small> This is required , enter number between 0:5 </small>
+        </div>
+      </div>
+      <!-- <div class="mb-3">
+        <label for="ImgURL" class="form-label">Img URL</label> <br>
+        <input type="text" class="form-control" formControlName="img" id="ImgURL"  ngModel>        
+      <div class="alert alert-warning"
+          *ngIf="holidayForm.controls['img'].invalid && (holidayForm.dirty || holidayForm.touched)">
+          <small> This is required</small>
+     </div>
+      </div> -->
+      <app-image-upload></app-image-upload>
+      <div class="mb-3 ">
+        <label for="Period">Period (in days)</label> <br>
+        <input class="form-control" type="number" min="1" id="Period" formControlName="period" ngModel>
+        <div class="alert alert-warning"
+          *ngIf="holidayForm.controls['period'].invalid && (holidayForm.dirty || holidayForm.touched)">
+          <small> This is required, should be atleast 1 day</small>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="Description" class="form-label">Description</label> <br>
+        <input type="text" class="form-control" formControlName="description" ngModel id="Description">
+        <div class="alert alert-warning"
+          *ngIf="holidayForm.controls['description'].invalid && (holidayForm.dirty || holidayForm.touched)">
+          <small> This is required , should be atleast 3 letters</small>
+        </div>
+      </div>
+
+      <div class="mb-3 ">
+        <label for="Price">Price</label> <br>
+        <input class="form-control" type="number" min="1" id="Price" formControlName="price" ngModel>
+        <div class="alert alert-warning"
+          *ngIf="holidayForm.controls['price'].invalid && (holidayForm.dirty || holidayForm.touched)">
+          <small> This is required, price should be more than 0</small>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" (click)="modal.close('Save click')">Submit</button>
+    </form>
+  </div>
+
+</ng-template>

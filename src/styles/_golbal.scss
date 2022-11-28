@@ -1,0 +1,97 @@
+@import "colors";
+$noramlTransition: all ease-in-out 0.3s;
+$borderRadius: 1.2em;
+
+// @mixin borderRadius {
+//     borderRadius: 1.25em;
+//     overflow: hidden;
+// }
+
+@mixin primaryBtn() {
+    background-color: $primaryColor;
+    border: none;
+    border-radius: $borderRadius;
+    padding: 0 0.7em;
+    color: white;
+    transition: $noramlTransition;
+    margin: 0.2em 0;
+    &:hover{
+       background-color:$primaryColorDark ;
+    }
+   }
+.primaryBtn{
+    @include primaryBtn;
+}
+
+@mixin secondaryBtn() {
+    background-color: $gray;
+    border: none;
+    border-radius: $borderRadius;
+    padding: 0 0.7em;
+    color: white;
+    transition: $noramlTransition;
+    margin: 0.2em ;
+    &:hover{
+       background-color:$primaryColorDark ;
+    }
+   }
+
+
+   
+.secondaryBtn{
+    @include secondaryBtn;
+
+}
+
+@mixin orangeBtn() {
+    background-color: $secoundryColor;
+    border: none;
+    // border: 5px solid white;
+    border-radius: $borderRadius;
+    padding: 5px 0.7em;
+    color: white;
+    transition: $noramlTransition;
+    // margin: 0.2em ;
+    &:hover{
+       background-color:$primaryColorDark ;
+    }
+   }
+.orangeBtn{
+    @include orangeBtn;
+}
+
+
+
+@mixin redBtn() {
+    background-color: rgb(223, 91, 91);
+    border: none;
+    // border: 5px solid white;
+    border-radius: $borderRadius;
+    padding: 5px 0.7em;
+    color: white;
+    transition: $noramlTransition;
+    // margin: 0.2em ;
+    &:hover{
+       background-color: rgb(231, 43, 43);
+    }
+   }
+.redBtn{
+    @include redBtn;
+}
+@mixin noMargin {
+    margin: 0 !important;
+}
+@mixin noPadding {
+    padding: 0 !important;
+}
+@mixin noSpacing {
+    margin: 0 !important;
+    padding: 0 !important; 
+}
+@mixin dFlex {
+display: flex;
+align-items: center;
+justify-content: center;    
+flex-direction: column;
+
+}

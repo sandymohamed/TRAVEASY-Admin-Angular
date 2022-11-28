@@ -1,0 +1,213 @@
+<section class="users">
+  <div class="service-count col-md-3" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
+    data-aos-duration="800">
+    <div class="icon" data-aos="fade-up" data-aos-duration="850">
+      <i class="fa-solid fa-plane"></i>
+    </div>
+    <article data-aos="fade-up" data-aos-duration="900">
+      <span>{{statistics.flightCount }}</span>
+      <p> Flights </p>
+    </article>
+  </div>
+  <br> <br><br>
+  <div class="row" >
+    <div class="col">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item"><a class="page-link" (click)="handleClick('Previous')" >Previous</a></li>
+      <li class="page-item"><a class="page-link" (click)="FunPageNumber(1)">1</a></li>
+      <li class="page-item"><a class="page-link" (click)="FunPageNumber(2)">2</a></li>
+      <li class="page-item"><a class="page-link" (click)="FunPageNumber(3)">3</a></li>
+      <li class="page-item"><a class="page-link" (click)="FunPageNumber(4)">4</a></li>
+      <li class="page-item"><a class="page-link" (click)="FunPageNumber(5)">5</a></li>
+      <li class="page-item"><a class="page-link" (click)="handleClick('Next')">Next</a></li>
+    </ul>
+  </nav>
+  </div>  
+  <div class="col">
+  <label  class="form-label">Page Number  : {{page}}</label>
+</div>
+
+</div>
+
+  <!-- Large modal -->
+  <button type="button" class="orangeBtn" data-toggle="modal" (click)="open(content)">New</button>
+  <br><br>
+  <table class="table table-striped table-hover" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
+    data-aos-duration="300">
+    <thead data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="350">
+      <td>Flying From</td>
+      <td>Flying To</td>
+      <td>Departure Date</td>
+      <td>Return Date</td>
+      <td>Trip Number</td>
+      <td>Seat no</td>
+      <td>Infant</td>
+      <td>Cabin Class</td>
+      <td>Price</td>
+      <td>Number Tickets</td>
+
+      <td>Delete</td>
+    </thead>
+    <tbody>
+
+      <tr data-aos="fade-up" *ngFor="let Item of FlightsList" data-aos-anchor-placement="center-bottom"
+        data-aos-duration="400">
+        <td>{{Item.FlyingFrom}}</td>
+        <td>{{Item.FlyingTo}}</td>
+        <td>{{Item.DepartureDate}}</td>
+        <td>{{Item.ReturnDate}}</td>
+        <td>{{Item.TravellerCount}}</td>
+        <td>{{Item.Child}}</td>
+        <td>{{Item.Infant}}</td>
+        <td>{{Item.CabinClass}}</td>
+        <td>{{Item.Price}}</td>
+        <td>{{Item.NumberTickets}}</td>
+
+
+        <td><button class="redBtn" (click)="handleDelete(Item._id)">Delete</button></td>
+      </tr>
+
+    </tbody>
+  </table>
+</section>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add Ticket</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+
+  <div class="modal-body">
+    <form [formGroup]="form" (ngSubmit)="FunSubmit(form.value)">
+
+      <div class="mb-3">
+        <label for="FlyingFrom" class="form-label">Flying From</label>
+        <!-- <input required type="text" name="country" class="form-control" id="FlyingFrom" formControlName="FlyingFrom"
+          ngModel> -->
+
+          <select name="country" id="FlyingFrom" class="form-control" formControlName="FlyingFrom" ngModel>
+            <option value="Egypt">Egypt</option>
+            <option value="Roma">Roma</option>
+            <option value="UAE">UAE</option>
+            <option value="USA">USA</option>
+            <option value="Paris">Paris</option>
+        </select>
+
+        
+
+        <div class="alert alert-warning" *ngIf="form.controls['FlyingFrom'].invalid && (form.dirty || form.touched)">
+          <small> FlyingFrom is required </small>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="FlyingTo" class="form-label">Flying To</label>
+        <!-- <input required type="text" name="country" class="form-control" id="FlyingTo" formControlName="FlyingTo"
+          ngModel> -->
+          <select name="country" id="FlyingTo" class="form-control" formControlName="FlyingTo" ngModel>
+            <option value="Egypt">Egypt</option>
+            <option value="Roma">Roma</option>
+            <option value="UAE">UAE</option>
+            <option value="USA">USA</option>
+            <option value="Paris">Paris</option>
+        </select>
+        <div class="alert alert-warning" *ngIf="form.controls['FlyingTo'].invalid && (form.dirty || form.touched)">
+          <small> FlyingTo is required </small>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="DepartureDate" class="form-label">DepartureDate</label>
+        <input required type="date" class="form-control" id="DepartureDate" formControlName="DepartureDate" ngModel>
+        <div class="alert alert-warning" *ngIf="form.controls['DepartureDate'].invalid && (form.dirty || form.touched)">
+          <small> DepartureDate is required </small>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="ReturnDate" class="form-label">ReturnDate</label>
+        <input required type="date" class="form-control" id="ReturnDate" formControlName="ReturnDate" ngModel>
+        <div class="alert alert-warning" *ngIf="form.controls['ReturnDate'].invalid && (form.dirty || form.touched)">
+          <small> ReturnDate is required</small>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="TravellerCount" class="form-label">Trip Number</label>
+        <input required type="text" class="form-control" id="TravellerCount" formControlName="TravellerCount" ngModel>
+        <div class="alert alert-warning"
+          *ngIf="form.controls['TravellerCount'].invalid && (form.dirty || form.touched)">
+          <small> Trip Number Numberunt is required </small>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="Child" class="form-label">Seat no</label>
+        <input required type="number" class="form-control" id="Child" formControlName="Child" ngModel>
+        <div class="alert alert-warning" *ngIf="form.controls['Child'].invalid && (form.dirty || form.touched)">
+          <small> Seat no is required </small>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="Infant" class="form-label">Infant</label>
+        <input required type="text" class="form-control" id="Infant" formControlName="Infant" ngModel>
+        <div class="alert alert-warning" *ngIf="form.controls['Infant'].invalid && (form.dirty || form.touched)">
+          <small> Infant is required </small>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="CabinClass" class="form-label">Cabin Class</label>
+        <!-- <input required type="text" name="daCabinClass" class="form-control" id="CabinClass"
+          formControlName="CabinClass" ngModel> -->
+
+          <select name="country" id="CabinClass" class="form-control" formControlName="CabinClass" ngModel>
+            <option value="first">first</option>
+          <option value="business">business</option>
+          <option value="economy">economy</option>
+        </select>
+
+
+
+        <div class="alert alert-warning" *ngIf="form.controls['CabinClass'].invalid && (form.dirty || form.touched)">
+          <small> CabinClass is required </small>
+        </div>
+
+
+
+      </div>
+
+      <div class="mb-3">
+        <label for="Price" class="form-label">Price</label>
+        <input required type="number" class="form-control" id="Price" formControlName="Price" ngModel>
+        <div class="alert alert-warning" *ngIf="form.controls['Price'].invalid && (form.dirty || form.touched)">
+          <small> Price is required </small>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="NumberTickets" class="form-label">Number Tickets</label>
+        <input required type="number" class="form-control" id="NumberTickets" formControlName="NumberTickets" ngModel>
+        <div class="alert alert-warning" *ngIf="form.controls['NumberTickets'].invalid && (form.dirty || form.touched)">
+          <small> Number Tickets is required </small>
+        </div>
+      </div>
+
+
+      <div class="mb-3 ">
+        <p>Airline</p>
+
+        <div *ngFor="let i of AirlineList">
+          <input class="me-1" type="radio" id="{{i?._id}}" formControlName="Airline" [value]="i?._id" ngModel>
+          <label class="form-label" for="{{i?._id }}">{{i?.AirlineName}}</label> <br>
+        </div>
+        <div class="alert alert-warning" *ngIf="form.controls['Airline'].invalid ">
+          <small> This is required</small>
+        </div>
+      </div><br><br>
+      <button type="submit" class="btn btn-primary" (click)="modal.close('Save click')">Submit</button>
+    </form>
+  </div>
+</ng-template>

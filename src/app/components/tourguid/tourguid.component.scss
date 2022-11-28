@@ -1,0 +1,50 @@
+@import "../../../styles/golbal";
+@import "../../../styles/colors";
+
+.tourGuid{
+    .service-count {
+        margin: 1rem;
+        // display: flex;
+        // justify-content: space-between;
+        padding: 20px 10px;
+        border-radius: $borderRadius;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        .icon {
+            i {
+                font-size: 4rem;
+                color: $white;
+            }
+
+        }
+
+        article {
+            @include dFlex;
+
+            span {
+                width: 80px;
+                padding: 5px;
+                margin-bottom: 10px;
+                color: rgba(107,219,154,1);
+                font-size: 1.5rem;
+                font-weight: 800;
+
+                text-align: center;
+
+                background-color: $white;
+                border-radius: $borderRadius;
+            }
+
+            p {}
+
+        }
+
+        &:nth-child(1) {
+            background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(107,219,154,1) 100%);
+        }
+
+    }
+
+}

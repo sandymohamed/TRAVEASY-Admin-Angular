@@ -1,0 +1,62 @@
+<section class="tourGuid">
+
+    <div class="service-count col-md-3" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
+        data-aos-duration="300">
+        <div class="icon" data-aos="fade-up" data-aos-duration="350">
+            <i class="fa-solid fa-earth-asia"></i>
+        </div>
+        <article data-aos="fade-up" data-aos-duration="400">
+            <span>{{cityList.length}}</span>
+            <p> Holidays </p>
+        </article>
+    </div>
+    <button class="btn btn-primary" (click)="open(content)" (click)="showForm()">Add New City</button>
+
+    <table class="table table-striped table-hover" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
+        data-aos-duration="300">
+        <thead data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="350">
+            <!-- <td>Id</td> -->
+            <td>City</td>
+          
+            <td>Delete</td>
+
+        </thead>
+        <tbody>
+ 
+            <tr data-aos="fade-up" *ngFor="let i of cityList" data-aos-anchor-placement="center-bottom" data-aos-duration="400">
+                <!-- <td>{{i?._id }}</td> -->
+                <td>{{i?.City_Name}}</td>
+    
+
+                <td><button class="redBtn"  (click)="handleDelete(i?._id)">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<hr>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title"> Post New City</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+  
+    <div class="modal-body">
+<form [hidden]=" !postMode" [formGroup]='form' (ngSubmit)="handleSubmit(form.value)">
+   
+    <div class="mb-3">
+      <label for="City" class="form-label">City</label>
+      <input  required type="text" class="form-control" id="City" formControlName="City_Name" ngModel >
+      <div class="alert alert-warning"
+      *ngIf="form.controls['City_Name'].invalid && (form.dirty || form.touched)">
+      <small> This is required , should be atleast 3 letters</small>
+    </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary"  (click)="modal.close('Save click')">Submit</button>
+  </form>
+</div>
+
+</ng-template>

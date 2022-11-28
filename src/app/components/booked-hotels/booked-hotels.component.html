@@ -1,0 +1,170 @@
+<section class="tourGuid">
+
+    <div class="service-count col-md-3" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
+        data-aos-duration="300">
+        <div class="icon" data-aos="fade-up" data-aos-duration="350">
+            <i class="fa-solid fa-earth-asia"></i>
+        </div>
+        <article data-aos="fade-up" data-aos-duration="400">
+            <span>{{bookedList.length}}</span>
+            <p> Booked Hotels </p>
+        </article>
+    </div>
+
+    <!-- <button  class="btn btn-primary" (click)="showForm()">Add New Hotel</button> -->
+    <table class="table table-striped table-hover" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
+        data-aos-duration="300">
+        <thead data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="350">
+            <!-- <td>Id</td> -->
+            <!-- <td>Room Count</td> -->
+            <td>Adult Count</td>
+            <td>Child</td>
+            <!-- <td>Period (in days)</td> -->
+            <td>Single</td>
+            <td>Double</td>
+            <td>Is Approve</td>
+            <td>Start Date</td>
+            <td>End Date</td>
+            <td>Hotels</td>
+            <td>Tourist</td>
+            <!-- <td>Guide</td> -->
+            <td>Edit</td>
+            <td>Delete</td>
+
+        </thead>
+        <tbody>
+ 
+            <tr data-aos="fade-up" *ngFor="let i of bookedList" data-aos-anchor-placement="center-bottom" data-aos-duration="400">
+                <!-- <td>{{i?._id}}</td> -->
+                <!-- <td>{{i?.RoomCount}}</td> -->
+                <td>{{i?.AdultCount}}</td>
+                <td>{{i?.Child}}</td>
+                <!-- <td>{{i?.Period}}</td> -->
+                <td>{{i?.Single}}</td>
+                <td>{{i?.Double}}</td>
+                <td>{{i?.IsApprove}}</td>
+                <td>{{i?.startDate| date:'MM/dd/yyyy '}}</td>
+                <td>{{i?.endDate| date:'MM/dd/yyyy '}}</td>
+                <td>{{i?.Hotels?.HotelName }}</td>
+                <td>{{i?.Tourist?.username}}</td>
+                <!-- <td>{{i?.Guide}}</td> -->
+                <td><button class="orangeBtn" (click)="open(content)"  (click)="handleEditBtn(i?._id)">Edit</button></td>
+                <td><button class="redBtn"  (click)="handleDelete(i?._id)">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+<hr>
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Booked Hotel Details</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+
+  <div class="modal-body">
+<form
+ [hidden]="!editMode" [formGroup]="form" (ngSubmit)="handleSubmit(form.value)" >
+ 
+    <div class="mb-3 ">
+      <p>is Approve?</p>
+
+      <label class="me-3 fs-5" for="true"  >true</label>
+      <input    type="radio" id="true" formControlName="isApprove" value="true" ngModel > <br>
+      <label class="me-3 fs-5" for="false"  >false</label>
+      <input    type="radio" id="false" formControlName="isApprove" value="false" ngModel >
+    </div>
+
+    <div class="alert alert-warning" *ngIf="form.controls['isApprove'].invalid && (form.dirty || form.touched)">
+      <small> this field is required</small>
+    </div> 
+
+    <fieldset [disabled]="isDisabled">
+
+    <!-- <div class="mb-3">
+      <label for="RoomCount" class="form-label">Room Count</label>
+      <input class="form-control" required  type="number" id="RoomCount"  formControlName="roomCount"  ngModel >
+    
+    </div>
+    <div class="alert alert-warning" *ngIf="form.controls['roomCount'].invalid && (form.dirty || form.touched)">
+      <small> this field is required</small>
+    </div>  -->
+
+    <div class="mb-3">
+      <label for="adultCount" class="form-label">adult Count</label>
+      <input class="form-control" required   type="number" id="adultCount" formControlName="adultCount" ngModel >
+    </div>
+    <div class="alert alert-warning" *ngIf="form.controls['adultCount'].invalid && (form.dirty || form.touched)">
+      <small> this field is required</small>
+    </div> 
+
+    <div class="mb-3 ">
+        <label for="Child"  class="form-label">Child Count</label>
+
+      <input class="form-control" required   type="number" id="Child" formControlName="child" ngModel >
+    </div>
+    <div class="alert alert-warning" *ngIf="form.controls['child'].invalid && (form.dirty || form.touched)">
+      <small> this field is required</small>
+    </div> 
+
+      <!-- <div class="mb-3 ">
+        <label for="Period"  class="form-label">Period (in days)</label>
+        <input class="form-control" required   type="number" id="Period" formControlName="period" ngModel >
+      </div>
+      <div class="alert alert-warning" *ngIf="form.controls['period'].invalid && (form.dirty || form.touched)">
+        <small> this field is required</small>
+      </div>  -->
+
+      <div class="mb-3 ">
+        <label for="single"  class="form-label">single</label>
+        <input class="form-control" required   type="number" id="single" formControlName="single" ngModel >
+      </div> 
+      <div class="alert alert-warning" *ngIf="form.controls['single'].invalid && (form.dirty || form.touched)">
+        <small> this field is required</small>
+      </div> 
+
+        <div class="mb-3 ">
+        <label for="double"  class="form-label">double</label>
+        <input class="form-control" required   type="number" id="double" formControlName="double" ngModel >
+      </div>
+      <div class="alert alert-warning" *ngIf="form.controls['double'].invalid && (form.dirty || form.touched)">
+        <small> this field is required</small>
+      </div> 
+    
+      <div class="mb-3">
+        <label for="startDate" class="form-label">startDate</label>
+        <input class="form-control" required   type="date"  formControlName="startDate" ngModel id="startDate">
+      </div>
+      <div class="mb-3">
+        <label for="endDate" class="form-label">endDate</label>
+        <input class="form-control" required   type="date"  formControlName="endDate" ngModel id="endDate">
+      </div>
+      
+      <!-- <div class="mb-3">
+        <label for="hotels" class="form-label">hotels</label>
+        <input class="form-control" required   type="text" id="hotels" formControlName="hotels" ngModel >
+      </div>
+      <div class="alert alert-warning" *ngIf="form.controls['hotels'].invalid && (form.dirty || form.touched)">
+        <small> this field is required</small>
+      </div> 
+
+      <div class="mb-3">
+        <label for="tourist" class="form-label">tourist</label>
+        <input class="form-control" required   type="text" id="tourist" formControlName="tourist" ngModel >
+      </div>
+      <div class="alert alert-warning" *ngIf="form.controls['tourist'].invalid && (form.dirty || form.touched)">
+        <small> this field is required</small>
+      </div>  -->
+      <!-- <div class="mb-3">
+        <label for="guide" class="form-label">guide</label>
+        <input class="form-control" required   type="text" id="guide" formControlName="guide" ngModel >
+      </div> -->
+
+ </fieldset>
+
+    <button type="submit"  (click)="modal.close('Save click')" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+</ng-template>

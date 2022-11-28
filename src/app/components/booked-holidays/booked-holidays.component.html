@@ -1,0 +1,126 @@
+<section class="tourGuid">
+
+    <div class="service-count col-md-3" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
+        data-aos-duration="300">
+        <div class="icon" data-aos="fade-up" data-aos-duration="350">
+            <i class="fa-solid fa-earth-asia"></i>
+        </div>
+        <article data-aos="fade-up" data-aos-duration="400">
+            <span>{{bookedList.length}}</span>
+            <p> Booked Hotels </p>
+        </article>
+    </div>
+
+    <!-- <button  class="btn btn-primary" (click)="showForm()">Add New Hotel</button> -->
+    <table class="table table-striped table-hover" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
+        data-aos-duration="300">
+        <thead data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="350">
+            <!-- <td>Id</td> -->
+            <td>Room Count</td>
+            <td>Adult Count</td>
+            <td>Child</td>
+            <!-- <td>Period (in days)</td> -->
+            <td>Is Approve</td>
+            <td>start Date</td>
+            <td>end Date</td>
+            <td>Holiday</td>
+            <td>Tourist</td>
+            <!-- <td>Guide</td> -->
+            <td>Edit</td>
+            <td>Delete</td>
+
+        </thead>
+        <tbody>
+ 
+            <tr data-aos="fade-up" *ngFor="let i of bookedList" data-aos-anchor-placement="center-bottom" data-aos-duration="400">
+                <!-- <td>{{i?._id}}</td> -->
+                <td>{{i?.RoomCount}}</td>
+                <td>{{i?.AdultCount}}</td>
+                <td>{{i?.Child}}</td>
+                <!-- <td>{{i?.Period}}</td> -->
+                <td>{{i?.IsApprove}}</td>
+                <td>{{i?.startDate| date:'MM/dd/yyyy '}}</td>
+                <td>{{i?.endDate| date:'MM/dd/yyyy '}}</td>
+                <td>{{i?.Holidays?.Description}}</td>
+                <td>{{i?.Tourist?.username}}</td>
+
+                <td><button class="orangeBtn" (click)="open(content)"  (click)="handleEditBtn(i?._id)">Edit</button></td>
+                <td><button class="redBtn"  (click)="handleDelete(i?._id)">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+<hr>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Booked Holiday Details</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+
+  <div class="modal-body">
+<form
+ [hidden]="!editMode" [formGroup]="form" (ngSubmit)="handleSubmit(form.value)" >
+
+    <div class="mb-3 ">
+      <p>is Approve?</p>
+
+      <label class="me-3 fs-5" for="true"  >true</label>
+      <input    type="radio" id="true" formControlName="isApprove" value="true" > <br>
+      <label class="me-3 fs-5" for="false"  >false</label>
+      <input    type="radio" id="false" formControlName="isApprove" value="false" >
+    
+      <div class="alert alert-warning"
+      *ngIf="form.controls['isApprove'].invalid && (form.dirty || form.touched)">
+      <small> This is required</small>
+    </div>
+    </div>
+    <fieldset [disabled]="isDisabled">
+
+    <div class="mb-3">
+      <label for="RoomCount" class="form-label">Room Count</label>
+      <input class="form-control"   type="number" id="RoomCount"  formControlName="roomCount"  >
+
+    </div>
+    <div class="mb-3">
+      <label for="adultCount" class="form-label">adult Count</label>
+      <input class="form-control"   type="number" id="adultCount" formControlName="adultCount" >
+    </div>
+    <div class="mb-3 ">
+        <label for="Child"  class="form-label">Child Count</label>
+
+      <input class="form-control"   type="number" id="Child" formControlName="child" >
+    </div>
+
+      <!-- <div class="mb-3 ">
+        <label for="Period"  class="form-label">Period (in days)</label>
+        <input class="form-control"   type="number" id="Period" formControlName="period" >
+      </div> -->
+     
+      
+      <div class="mb-3">
+        <label for="startDate" class="form-label">Start Date</label>
+        <input class="form-control"   type="date"  formControlName="startDate" id="startDate">
+      </div>
+      <div class="mb-3">
+        <label for="endDate" class="form-label">End Date</label>
+        <input class="form-control"   type="date"  formControlName="endDate" id="endDate">
+      </div>
+      
+      <!-- <div class="mb-3">
+        <label for="Holidays" class="form-label">Holidays</label>
+        <input class="form-control"   type="text" id="Holidays" formControlName="holidays" >
+      </div>
+      
+
+      <div class="mb-3">
+        <label for="tourist" class="form-label">tourist</label>
+        <input class="form-control"   type="text" id="tourist" formControlName="tourist" >
+      </div> -->
+  
+      </fieldset>
+
+    <button type="submit"  class="btn btn-primary"  (click)="modal.close('Save click')">Submit</button>
+  </form>
+  </div>
+</ng-template>

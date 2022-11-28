@@ -1,0 +1,96 @@
+<div class="page-holder align-items-center py-4 bg-gray-100 vh-100">
+  <div class="container">
+    <div class="row align-items-center">
+      <!-- register -->
+      <div class="col-lg-6 px-lg-4">
+        <div class="card">
+          <div class="card-header px-lg-5">
+            <div class="card-heading text-primary">Add Moderator</div>
+          </div>
+          <div class="card-body p-lg-5">
+
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" #f="ngForm">
+              <div class="form-floating mb-3">
+                <input class="form-control" id="email" type="email" placeholder="name@example.com" required
+                  formControlName="email">
+                <label for="email">Email address</label>
+              </div>
+              <div
+                *ngIf="registerForm.controls['email'].invalid && (registerForm.controls['email'].dirty || registerForm.controls['email'].touched)"
+                class="alert alert-danger">
+                Email invalid
+              </div>
+              <div class="form-floating mb-3">
+                <input class="form-control" id="username" type="email" placeholder="name@example.com" required
+                  formControlName="username">
+                <label for="username">Username</label>
+              </div>
+              <div
+                *ngIf="registerForm.controls['username'].invalid && (registerForm.controls['username'].dirty || registerForm.controls['username'].touched)"
+                class="alert alert-danger">
+                Username invalid, Use characters and numbers only
+
+              </div>
+              <div class="form-floating mb-3">
+                <input class="form-control" id="firstName" type="text" placeholder="first name" required
+                  formControlName="firstName">
+                <label for="firstName">First name</label>
+              </div>
+              <div
+                *ngIf="registerForm.controls['firstName'].invalid && (registerForm.controls['firstName'].dirty || registerForm.controls['firstName'].touched)"
+                class="alert alert-danger">
+                First name is required with minimum length 3 characters
+              </div>
+              <div class="form-floating mb-3">
+                <input class="form-control" id="lastName" type="text" placeholder="last name" required
+                  formControlName="lastName">
+                <label for="lastName">Last name</label>
+              </div>
+              <div
+                *ngIf="registerForm.controls['lastName'].invalid && (registerForm.controls['lastName'].dirty || registerForm.controls['lastName'].touched)"
+                class="alert alert-danger">
+                Last name is required with minimum length 3 characters
+              </div>
+              <div class="form-floating mb-3">
+                <input class="form-control" id="country" type="text" placeholder="last name" required
+                  formControlName="country">
+                <label for="country">Country</label>
+              </div>
+              <div
+                *ngIf="registerForm.controls['country'].invalid && (registerForm.controls['country'].dirty || registerForm.controls['country'].touched)"
+                class="alert alert-danger">
+                Country is required with minimum length 4 characters
+              </div>
+              <div class="form-floating mb-3">
+                <input class="form-control" id="password" type="password" placeholder="Password" required
+                  formControlName="password">
+                <label for="password">Password</label>
+              </div>
+              <div
+                *ngIf="registerForm.controls['password'].invalid && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)"
+                class="alert alert-danger">
+                Invalid password use strong one
+              </div>
+              <div class="form-group">
+                <button class="btn btn-primary" type="submit" [disabled]="!registerForm.valid">Submit</button>
+              </div>
+            </form>
+            <div class="alert alert-success" *ngIf="isSuccessful">
+              Moderator is added successfully!
+            </div>
+
+            <div class="text-center text-success">
+              <h3>{{response}}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-xl-5 ms-xl-auto px-lg-4 text-center text-primary"><img class="img-fluid mb-4" width="300"
+          src="https://img.freepik.com/free-vector/vacation-holidays-background-with-realistic-globe-suitcase-photo-camera_1284-10476.jpg?1?w=360"
+          alt="" style="transform: rotate(10deg)">
+        <h1 class="mb-4">Traveasy.com <br class="d-none d-lg-inline">Vacation become easier.</h1>
+
+      </div>
+    </div>
+  </div>
+</div>
