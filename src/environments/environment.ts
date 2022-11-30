@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  BasicURL: 'https://traveasy.herokuapp.com/',
+  BasicURL: 'http://localhost:8080/',
 };
 
 /*
