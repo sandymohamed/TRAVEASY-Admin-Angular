@@ -12,43 +12,46 @@
   </div>
 
   <button class="btn btn-primary" (click)="open(content)" (click)="showForm()">Add New Hotel</button>
-  <table class="table table-striped table-hover" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
-    data-aos-duration="300">
-    <thead data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="350">
+ <div class="table-container">
+
+   <table class="table table-striped table-hover" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
+   data-aos-duration="300">
+   <thead data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="350">
       <!-- <td>Id</td> -->
-      <td>Hotel Name</td>
-      <td>City</td>
-      <td>Evaluation</td>
-      <!-- <td>Img URL</td> -->
-      <!-- <td>Period (in days)</td> -->
-      <td>Description</td>
-      <td>Price</td>
-      <td>lon(for map)</td>
-      <td>lat(for map)</td>
+      <td class="me-1 text-center">Hotel Name</td>
+      <td class="me-1 text-center">City</td>
+      <td class="me-1 text-center">Evaluation</td>
+      <!-- <td class="me-1 text-center">Img URL</td> -->
+      <!-- <td class="me-1 text-center">Period (in days)</td> -->
+      <td class="me-1 text-center">Description</td>
+      <td class="me-1 text-center">Price</td>
+      <td class="me-1 text-center">lon(for map)</td>
+      <td class="me-1 text-center">lat(for map)</td>
 
-      <td>Edit</td>
-      <td>Delete</td>
-
+      <td class="me-1 text-center">Edit</td>
+      <td class="me-1 text-center">Delete</td>
+      
     </thead>
     <tbody>
 
       <tr data-aos="fade-up" *ngFor="let i of hotelsList" data-aos-anchor-placement="center-bottom"
         data-aos-duration="400">
-        <!-- <td>{{i?._id}}</td> -->
-        <td>{{i?.HotelName}}</td>
-        <td>{{i?.City?.City_Name}}</td>
-        <td>{{i?.Evaluation}}</td>
-        <!-- <td>{{i?.ImgURL}}</td> -->
-        <!-- <td>{{i?.Period}}</td> -->
-        <td>{{i?.Description}}</td>
-        <td>{{i?.Price}}</td>
-        <td>{{i?.lon}}</td>
-        <td>{{i?.lat}}</td>
-        <td><button class="orangeBtn" (click)="open(content)" (click)="handleEditBtn(i?._id)">Edit</button></td>
-        <td><button class="redBtn" (click)="handleDelete(i?._id)">Delete</button></td>
+        <!-- <td class="me-1 text-center">{{i?._id}}</td> -->
+        <td class="me-1 text-center">{{i?.HotelName}}</td>
+        <td class="me-1 text-center">{{i?.City?.City_Name}}</td>
+        <td class="me-1 text-center">{{i?.Evaluation}}</td>
+        <!-- <td class="me-1 text-center">{{i?.ImgURL}}</td> -->
+        <!-- <td class="me-1 text-center">{{i?.Period}}</td> -->
+        <td class="me-1 text-center description-column">{{i?.Description}}</td>
+        <td class="me-1 text-center">{{i?.Price}}</td>
+        <td class="me-1 text-center">{{i?.lon}}</td>
+        <td class="me-1 text-center">{{i?.lat}}</td>
+        <td class="me-1 text-center"><button class="orangeBtn" (click)="open(content)" (click)="handleEditBtn(i?._id)">Edit</button></td>
+        <td class="me-1 text-center"><button class="redBtn" (click)="handleDelete(i?._id)">Delete</button></td>
       </tr>
     </tbody>
   </table>
+</div>
 </section>
 <hr>
 

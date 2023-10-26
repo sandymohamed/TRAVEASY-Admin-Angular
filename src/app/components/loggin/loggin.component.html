@@ -1,4 +1,4 @@
-<div class="container w-50 ">
+<div class="container w-75 p-5 ">
   <form [formGroup]="logginForm" name="logginForm" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
     <div class="mb-1">
       <label for="username" class="form-label">Username</label>
@@ -22,7 +22,7 @@
   </form>
   <div>
     <br>
-    <p>you can use this username: "adminmk1" and this password : "adminmk1111"</p>
+    <p>you can use this username: "johnDeo" and this password : "12345678"</p>
   </div>
   <div class="alert alert-success mt-2" *ngIf="isLoggedIn">
     Logged in as {{ roles }}.

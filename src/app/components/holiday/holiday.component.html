@@ -11,39 +11,40 @@
     </article>
   </div>
   <button class="btn btn-primary" (click)="open(content)" (click)="showForm()">Add New Holiday</button>
+ 
+  <div class="table-container">
 
   <table class="table table-striped table-hover" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
     data-aos-duration="300">
     <thead data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="350">
-      <!-- <td>Id</td> -->
-      <td>City</td>
-      <td>Evaluation</td>
-      <!-- <td>Img URL</td> -->
-      <td>Period (in days)</td>
-      <td>Description</td>
-      <td>Price</td>
+      <td class="me-2 text-center">City</td>
+      <td class="me-2 text-center">Evaluation</td>
+      <!-- <td class="me-2 text-center">Img URL</td> -->
+      <td class="me-2 text-center">Period</td>
+      <td class="me-2 text-center">Description</td>
+      <td class="me-2 text-center">Price</td>
 
-      <td>Edit</td>
-      <td>Delete</td>
+      <td class="me-2 text-center">Edit</td>
+      <td class="me-2 text-center">Delete</td>
 
     </thead>
     <tbody>
 
       <tr data-aos="fade-up" *ngFor="let i of holidaysList" data-aos-anchor-placement="center-bottom"
         data-aos-duration="400">
-        <!-- <td>{{i?._id}}</td> -->
-        <td>{{i?.City?.City_Name}}</td>
-        <td>{{i?.Evaluation}}</td>
-        <!-- <td>{{i?.ImgURL}}</td> -->
-        <td>{{i?.Period}}</td>
-        <td>{{i?.Description}}</td>
-        <td>{{i?.Price}}</td>
+        <td class="me-2 text-center">{{i?.City?.City_Name}}</td>
+        <td class="me-2 text-center">{{i?.Evaluation}}</td>
+        <!-- <td class="me-2 text-center">{{i?.ImgURL}}</td> -->
+        <td class="me-2 text-center">{{i?.Period}}</td>
+        <td class="me-2 text-center">{{i?.Description}}</td>
+        <td class="me-2 text-center">{{i?.Price}}</td>
 
-        <td><button class="orangeBtn" (click)="open(content)" (click)="handleEditBtn(i?._id)">Edit</button></td>
-        <td><button class="redBtn" (click)="handleDelete(i?._id)">Delete</button></td>
+        <td class="me-2 text-center"><button class="orangeBtn" (click)="open(content)" (click)="handleEditBtn(i?._id)">Edit</button></td>
+        <td class="me-2 text-center"><button class="redBtn" (click)="handleDelete(i?._id)">Delete</button></td>
       </tr>
     </tbody>
   </table>
+  </div>
 </section>
 
 <hr>
@@ -63,7 +64,7 @@
         <p>City</p>
 
         <div *ngFor="let i of cities">
-          <input class="me-1" type="radio" id="{{i?._id}}" formControlName="city" [value]="i?._id" ngModel>
+          <input class="me-2" type="radio" id="{{i?._id}}" formControlName="city" [value]="i?._id" ngModel>
           <label for="{{i?._id }}">{{i?.City_Name}}</label> <br>
         </div>
 

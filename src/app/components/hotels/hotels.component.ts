@@ -51,9 +51,7 @@ export class HotelsComponent implements OnInit {
           Validators.maxLength(25),
         ],
       ),
-      // img: new FormControl(
-      //   '',
-      // ),
+     
 
       evaluation:
         new FormControl(['', [
@@ -61,11 +59,7 @@ export class HotelsComponent implements OnInit {
           Validators.min(0),
           Validators.max(5)]
         ]),
-      // period: new FormControl('', [
-      //   Validators.required,
-      //   Validators.min(0),
-      // ]
-      // ),
+  
       description: new FormControl(
         '',
         [

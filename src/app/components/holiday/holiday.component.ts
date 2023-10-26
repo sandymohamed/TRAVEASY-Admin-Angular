@@ -141,7 +141,7 @@ export class HolidayComponent implements OnInit {
 
       } else {
         this.holidayService.postHoliday(holiday).subscribe(observer)
-        
+      console.log('in postssssss')
       }
     } else {
       this.notifyService.showDanger("Not Valid Data !!", "Notification")

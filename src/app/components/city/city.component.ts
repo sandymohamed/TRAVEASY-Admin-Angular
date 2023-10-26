@@ -93,10 +93,7 @@ export class CityComponent implements OnInit {
 }
 else {
   this.notifyService.showDanger("CITY NAME SHOULD BE ATLEAST 3 LETTERS !!", "Notification")
-
-}
-}
-
+}}
 
 handleDelete(id: any) {
   const observer = {
@@ -110,6 +107,4 @@ handleDelete(id: any) {
   };
   if(confirm("Are you sure to delete ")) {
   this.hotelService.deleteCity(id).subscribe(observer);
-  }
-}
-}
+  }}}
